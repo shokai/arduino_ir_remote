@@ -1,0 +1,34 @@
+#!/usr/bin/env ruby
+$:.unshift File.expand_path '../libs', File.dirname(__FILE__)
+require 'config'
+require 'ir_remote'
+
+if ARGV.empty?
+  STDERR.puts "#{$0} /dev/tty.usb-devicename"
+  exit 1
+end
+
+ir = Ir::Remote.new ARGV.shift
+ir.on :receive do |data|
+  puts data
+end
+last_ir_data = ""
+
+p Ir::Config
+
+loop do
+  puts "read/write? [r/w]"
+  line = STDIN.gets.strip
+  if line =~ /r/i
+    puts "[READ]"
+    ir.read do |data|
+      last_ir_data = data
+    end
+  elsif line =~ /w/i
+    puts "[WRITE]"
+    ir.write last_ir_data
+  elsif Ir::Config.has_key? line
+    puts "[#{line}]"
+    ir.write Ir::Config[line]
+  end
+end
