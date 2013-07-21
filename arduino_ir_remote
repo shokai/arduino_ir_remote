@@ -1,0 +1,32 @@
+#!/usr/bin/env ruby
+# -*- coding: utf-8 -*-
+require "rubygems"
+require "serialport"
+
+if ARGV.empty?
+  STDERR.puts 'ruby ruby-serialterm.rb /dev/tty/tty-usbdevice'
+  exit 1
+end
+
+sp = SerialPort.new(ARGV.shift, 9600, 8, 1, SerialPort::NONE) # 9600bps, 8bit, stopbit1, parity-none
+
+Thread.new do
+  loop do
+    recv = sp.getc
+    print recv
+  end
+end
+
+loop do
+  loop do
+    puts "read/write [r/w]"
+    line = STDIN.gets.strip
+    if line =~ /r/i
+      puts "read"
+      sp.write "r"
+    elsif line =~ /w/i
+      puts "write"
+      sp.write "w"
+    end
+  end
+end
