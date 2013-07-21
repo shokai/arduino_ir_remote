@@ -1,10 +1,14 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    event_emitter (0.2.5)
+    hashie (2.0.5)
     serialport (1.1.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  event_emitter
+  hashie
   serialport

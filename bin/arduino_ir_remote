@@ -14,7 +14,7 @@ ir.on :receive do |data|
 end
 last_ir_data = ""
 
-p Ir::Config
+puts "Ir::DATA => #{Ir::DATA.keys.inspect}"
 
 loop do
   puts "read/write? [r/w]"
@@ -27,8 +27,8 @@ loop do
   elsif line =~ /w/i
     puts "[WRITE]"
     ir.write last_ir_data
-  elsif Ir::Config.has_key? line
+  elsif Ir::DATA.has_key? line
     puts "[#{line}]"
-    ir.write Ir::Config[line]
+    ir.write Ir::DATA[line]
   end
 end
