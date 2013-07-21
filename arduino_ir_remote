@@ -8,12 +8,15 @@ if ARGV.empty?
   exit 1
 end
 
-sp = SerialPort.new(ARGV.shift, 9600, 8, 1, SerialPort::NONE) # 9600bps, 8bit, stopbit1, parity-none
+sp = SerialPort.new(ARGV.shift, 57600, 8, 1, SerialPort::NONE) # 9600bps, 8bit, stopbit1, parity-none
+
+ir_data = ""
 
 Thread.new do
   loop do
-    recv = sp.getc
-    print recv
+    recv = sp.gets.strip
+    puts recv
+    ir_data = recv.gsub(/^READ,/,"") if recv =~ /^READ,[\d,]+$/
   end
 end
 
@@ -22,11 +25,14 @@ loop do
     puts "read/write [r/w]"
     line = STDIN.gets.strip
     if line =~ /r/i
-      puts "read"
+      puts "[READ]"
       sp.write "r"
     elsif line =~ /w/i
-      puts "write"
-      sp.write "w"
+      puts "[WRITE]"
+      "w#{ir_data}W".split(//).each do |c|
+      sp.write c
+      sleep 0.001
+      end
     end
   end
 end

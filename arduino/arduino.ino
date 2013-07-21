@@ -1,38 +1,22 @@
 #define IR_DATA_SIZE 768
-byte ir_data[IR_DATA_SIZE];
-#define PIN_BTN 2
+unsigned int ir_data[IR_DATA_SIZE];
+unsigned int ir_index;
 #define PIN_IR_IN 3
-#define PIN_LED 13
 #define PIN_IR_OUT 12
-boolean btn_stat, btn_stat_p;
+#define READ 0
+#define WRITE 1
+byte mode;
 
 void setup(){
-  Serial.begin(9600);
-  delay(3000);
+  Serial.begin(57600);
   pinMode(PIN_IR_IN, INPUT);
   pinMode(PIN_IR_OUT, OUTPUT);
-  pinMode(PIN_BTN, INPUT);
-  pinMode(PIN_LED, OUTPUT);
-  btn_stat_p = btn_stat = digitalRead(PIN_BTN);
 }
 
 void loop(){
   if(Serial.available()){
     char recv = Serial.read();
-    switch(recv){
-    case 'r':
-    case 'R':
-      Serial.println("IR_READ_START");
-      ir_read(PIN_IR_IN);
-      Serial.println("IR_READ_END");
-      ir_print();
-      break;
-    case 'w':
-    case 'W':
-      ir_write(PIN_IR_OUT);
-      Serial.println("IR_WRITE");
-      break;
-    }
+    process_input(recv);
   }
 }
 
@@ -64,6 +48,7 @@ void ir_print(){
   unsigned int i;
   for(i = 0; i < IR_DATA_SIZE; i++){
     Serial.print(ir_data[i]);
+    if(ir_data[i] < 1) break;
     Serial.print(",");
   }
   Serial.println();
@@ -82,11 +67,37 @@ void ir_write(byte ir_pin){
         digitalWrite(ir_pin, true);
         delayMicroseconds(6);
         digitalWrite(ir_pin, false);
-        delayMicroseconds(7);
+        delayMicroseconds(8);
       }
     }
     else{
       while(micros() - start_at < interval_sum);
     }
+  }
+}
+
+void process_input(char recv){
+  if(recv == 'r'){
+    ir_read(PIN_IR_IN);
+    Serial.print("READ,");
+    ir_print();
+  }
+  else if(recv == 'w'){
+    for(ir_index = 0; ir_index < IR_DATA_SIZE; ir_index++){
+      ir_data[ir_index] = 0;
+    }
+    ir_index = 0;
+  }
+  else if(recv == ','){
+    if(ir_index < IR_DATA_SIZE) ir_index += 1;
+  }
+  else if(recv >= '0' && '9' >= recv){
+    ir_data[ir_index] = ir_data[ir_index]*10 + (recv - '0');
+  }
+  else if(recv == 'W'){
+    ir_write(PIN_IR_OUT);
+    ir_index = 0;
+    Serial.print("WRITE,");
+    ir_print();
   }
 }
