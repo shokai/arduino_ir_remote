@@ -33,4 +33,5 @@ loop do
   else
     puts "[#{line}] no data"
   end
+  sleep 2
 end
