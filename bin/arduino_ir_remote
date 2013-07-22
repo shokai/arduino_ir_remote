@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
 $:.unshift File.expand_path '../libs', File.dirname(__FILE__)
-require 'config'
 require 'ir_remote'
 
 if ARGV.empty?

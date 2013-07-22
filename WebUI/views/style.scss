@@ -1,0 +1,80 @@
+$font_black : #222;
+$font_white : #FFF;
+$link_color : #B81625;
+
+@mixin content-box {
+  margin: 10px 10px 10px 10px;
+  font: 12pt  "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  @include content-box;
+  background-color: #5AA4B8;
+  color : $font_black;
+  height: 100%;
+}
+
+#header {
+  color: $font_white;
+  float: left;
+}
+
+#toolbar {
+  float: right;
+  @include content-box;
+  height: 24px;
+  text-align: right;
+}
+
+#toolbar span.item {
+  height: 36px;
+  padding: 12px 5px 2px 5px;
+  background-color: #FFFFFF;
+  margin: 3px 5px 3px 5px;
+}
+
+#toolbar span.button {
+  text-decoration: underline;
+  color: $link_color;
+  cursor: pointer;
+}
+
+#toolbar img {
+  height: 100%;
+}
+
+#content {
+  clear: both;
+  @include content-box;
+  background-color: #FFFFFF;
+  padding: 10px;
+}
+
+#status {
+  @include content-box;
+  float: right;
+  text-align: right;
+}
+
+input.btn{
+  font-size: 150%;
+  padding: 8px;
+  margin: 10px;
+}
+
+ul li{
+  margin-bottom: 10px;
+  font-size: 100%;
+}
+
+a, a:visited, a:hover {
+  color: $link_color;
+}
+
+#footer {
+  text-align: right;
+}
