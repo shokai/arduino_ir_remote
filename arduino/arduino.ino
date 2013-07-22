@@ -1,5 +1,5 @@
 #define IR_DATA_SIZE 768
-unsigned int ir_data[IR_DATA_SIZE];
+byte ir_data[IR_DATA_SIZE];
 unsigned int ir_index;
 #define PIN_IR_IN 3
 #define PIN_IR_OUT 12
