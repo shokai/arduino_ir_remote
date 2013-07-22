@@ -31,6 +31,14 @@ Install Dependencies
     % bundle install
 
 
+data.yml
+--------
+
+save IR data into "data.yml"
+
+    % sample.data.yml data.yml
+
+
 Run
 ---
 
