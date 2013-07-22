@@ -22,6 +22,6 @@ $(function(){
   $(".btn_ir_write").click(function(e){
     var name = e.target.value;
     io.push("ir_write", name);
-    $("#ir .status").text("sending..").fadeIn(2000).fadeOut(2000);
+    $("#ir .status").text("writing ["+name+"]").fadeIn(600).fadeOut(2000);
   });
 });
