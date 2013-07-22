@@ -1,6 +1,6 @@
 helpers do
   def app_name
-    "Arduino Ir::Remote"
+    "Arduino IR::Remote"
   end
 
   def app_root

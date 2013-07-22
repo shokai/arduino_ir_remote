@@ -1,6 +1,6 @@
 io = Sinatra::RocketIO
 raise ArgumentError, 'please set ENV["ARDUINO"]' unless ENV["ARDUINO"]
-ir = Ir::Remote.new ENV["ARDUINO"]
+ir = IR::Remote.new ENV["ARDUINO"]
 logs = []
 
 get '/' do
@@ -23,9 +23,9 @@ io.on :disconnect do |client|
 end
 
 io.on :ir_write do |name|
-  unless Ir::DATA.has_key? name
-    $logger.info "[#{name}] is not Ir::DATA"
-    io.push :log, "[#{name}] is not Ir::DATA"
+  unless IR::DATA.has_key? name
+    $logger.info "[#{name}] is not IR::DATA"
+    io.push :log, "[#{name}] is not IR::DATA"
   else
     log = "[#{name}] - #{Time.now}"
     $logger.info log
@@ -34,6 +34,6 @@ io.on :ir_write do |name|
     while logs.size > 1000
       logs.shift
     end
-    ir.write Ir::DATA[name]
+    ir.write IR::DATA[name]
   end
 end

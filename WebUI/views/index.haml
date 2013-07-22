@@ -9,10 +9,10 @@
 %div#status
   %p.rocketio
 
-%h2 Ir::DATA
+%h2 IR::DATA
 %div#ir
   %p.buttons
-    - Ir::DATA.keys.each do |name|
+    - IR::DATA.keys.each do |name|
       %input{:type => :button, :value => name, :class => "btn_ir_write btn"}
   %p.status
 

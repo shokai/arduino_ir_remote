@@ -3,7 +3,7 @@ require "serialport"
 require "event_emitter"
 require File.expand_path "config", File.dirname(__FILE__)
 
-module Ir 
+module IR
   class Remote
     include EventEmitter
 

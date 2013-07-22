@@ -7,13 +7,13 @@ if ARGV.empty?
   exit 1
 end
 
-ir = Ir::Remote.new ARGV.shift
+ir = IR::Remote.new ARGV.shift
 ir.on :data do |data|
   puts data
 end
 last_ir_data = ""
 
-puts "Ir::DATA => #{Ir::DATA.keys.inspect}"
+puts "IR::DATA => #{IR::DATA.keys.inspect}"
 
 loop do
   puts "read/write? [r/w]"
@@ -27,9 +27,9 @@ loop do
   elsif ["w", "write"].include? line.downcase
     puts "[WRITE]"
     ir.write last_ir_data
-  elsif Ir::DATA.has_key? line
+  elsif IR::DATA.has_key? line
     puts "[#{line}]"
-    ir.write Ir::DATA[line]
+    ir.write IR::DATA[line]
   else
     puts "[#{line}] no data"
   end
