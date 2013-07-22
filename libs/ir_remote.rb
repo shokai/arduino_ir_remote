@@ -8,19 +8,35 @@ module Ir
     include EventEmitter
 
     def initialize(port)
+      @state = nil
       @sp = SerialPort.new(port, 57600, 8, 1, SerialPort::NONE) # 57600bps, 8bit, stopbit1, parity-none
       Thread.new do
         loop do
-          recv = @sp.gets.strip
-          if recv =~ /^READ,[\d,]+$/
-            data = recv.gsub(/^READ,/,"")
-            emit :__ir_read, data
-          end
-          emit :receive, recv
+          process_input @sp.gets.strip
         end
       end
     end
 
+    private
+    def process_input(input)
+      case input
+      when "READ"
+        @state = :read
+        return
+      when "WRITE"
+        @state = :write
+        return
+      end
+
+      case @state
+      when :read
+        emit :__ir_read, input if input =~ /^[\d,]+$/
+      else
+      end
+      emit :data, input
+    end
+
+    public
     def write(data)
       "w#{data}W".split(//).each do |c|
         @sp.write c

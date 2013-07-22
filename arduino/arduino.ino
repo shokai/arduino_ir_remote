@@ -76,28 +76,28 @@ void ir_write(byte ir_pin){
   }
 }
 
-void process_input(char recv){
-  if(recv == 'r'){
+void process_input(char input){
+  if(input == 'r'){
     ir_read(PIN_IR_IN);
-    Serial.print("READ,");
+    Serial.println("READ");
     ir_print();
   }
-  else if(recv == 'w'){
+  else if(input == 'w'){
     for(ir_index = 0; ir_index < IR_DATA_SIZE; ir_index++){
       ir_data[ir_index] = 0;
     }
     ir_index = 0;
   }
-  else if(recv == ','){
+  else if(input == ','){
     if(ir_index < IR_DATA_SIZE) ir_index += 1;
   }
-  else if(recv >= '0' && '9' >= recv){
-    ir_data[ir_index] = ir_data[ir_index]*10 + (recv - '0');
+  else if(input >= '0' && '9' >= input){
+    ir_data[ir_index] = ir_data[ir_index]*10 + (input - '0');
   }
-  else if(recv == 'W'){
+  else if(input == 'W'){
     ir_write(PIN_IR_OUT);
     ir_index = 0;
-    Serial.print("WRITE,");
+    Serial.println("WRITE");
     ir_print();
   }
 }

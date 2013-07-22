@@ -8,7 +8,7 @@ if ARGV.empty?
 end
 
 ir = Ir::Remote.new ARGV.shift
-ir.on :receive do |data|
+ir.on :data do |data|
   puts data
 end
 last_ir_data = ""
@@ -18,16 +18,19 @@ puts "Ir::DATA => #{Ir::DATA.keys.inspect}"
 loop do
   puts "read/write? [r/w]"
   line = STDIN.gets.strip
-  if line =~ /r/i
+  if ["r", "read"].include? line.downcase
     puts "[READ]"
     ir.read do |data|
       last_ir_data = data
+      p data
     end
-  elsif line =~ /w/i
+  elsif ["w", "write"].include? line.downcase
     puts "[WRITE]"
     ir.write last_ir_data
   elsif Ir::DATA.has_key? line
     puts "[#{line}]"
     ir.write Ir::DATA[line]
+  else
+    puts "[#{line}] no data"
   end
 end
