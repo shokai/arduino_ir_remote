@@ -1,6 +1,7 @@
 #define IR_DATA_SIZE 768
 byte ir_data[IR_DATA_SIZE];
 unsigned int ir_index;
+#define PIN_LED 13
 #define PIN_IR_IN 3
 #define PIN_IR_OUT 12
 #define READ 0
@@ -11,6 +12,7 @@ void setup(){
   Serial.begin(57600);
   pinMode(PIN_IR_IN, INPUT);
   pinMode(PIN_IR_OUT, OUTPUT);
+  pinMode(PIN_LED, OUTPUT);
 }
 
 void loop(){
@@ -78,9 +80,11 @@ void ir_write(byte ir_pin){
 
 void process_input(char input){
   if(input == 'r'){
+    digitalWrite(PIN_LED, true);
     ir_read(PIN_IR_IN);
     Serial.println("READ");
     ir_print();
+    digitalWrite(PIN_LED, false);
   }
   else if(input == 'w'){
     for(ir_index = 0; ir_index < IR_DATA_SIZE; ir_index++){
@@ -95,9 +99,11 @@ void process_input(char input){
     ir_data[ir_index] = ir_data[ir_index]*10 + (input - '0');
   }
   else if(input == 'W'){
+    digitalWrite(PIN_LED, true);
     ir_write(PIN_IR_OUT);
     ir_index = 0;
     Serial.println("WRITE");
     ir_print();
+    digitalWrite(PIN_LED, false);
   }
 }

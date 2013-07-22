@@ -2,6 +2,7 @@ Arduino IR::Remote
 ==================
 - IR Learning Remote
 - https://github.com/shokai/arduino_ir_remote
+- Read/Write IR Remote on CUI and WebUI
 
 
 Dependencies
