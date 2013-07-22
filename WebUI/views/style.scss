@@ -1,6 +1,7 @@
 $font_black : #222;
 $font_white : #FFF;
-$link_color : #B81625;
+$link_color : #27CBAF;
+$bg_color   : #FD8556;
 
 @mixin content-box {
   margin: 10px 10px 10px 10px;
@@ -13,7 +14,7 @@ html {
 
 body {
   @include content-box;
-  background-color: #5AA4B8;
+  background-color: $bg_color;
   color : $font_black;
   height: 100%;
 }
