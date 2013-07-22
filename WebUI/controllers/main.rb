@@ -3,6 +3,10 @@ raise ArgumentError, 'please set ENV["ARDUINO"]' unless ENV["ARDUINO"]
 ir = IR::Remote.new ENV["ARDUINO"]
 logs = []
 
+before '/*' do
+  protect!
+end
+
 get '/' do
   haml :index
 end
