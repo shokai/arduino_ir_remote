@@ -1,9 +1,10 @@
 Arduino IR::Remote
 ==================
-- IR Learning Remote
-- https://github.com/shokai/arduino_ir_remote
-- Read/Write IR Remote on CUI and WebUI
+IR Learning Remote
 
+- Read/Write IR Remote on CUI and WebUI
+- https://github.com/shokai/arduino_ir_remote
+- [Arduinoで赤外線リモコン作ってWebから操作できるようにした](http://shokai.org/blog/archives/8012)
 
 Dependencies
 ------------
