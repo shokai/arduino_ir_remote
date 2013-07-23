@@ -27,6 +27,8 @@ Install Dependencies
 - IR Receiver
   - Digital PIN 3
 
+<img src="http://farm8.staticflickr.com/7282/9343246881_4bccff6386.jpg">
+
 ### Install Rubygems
 
     % gem install bundler

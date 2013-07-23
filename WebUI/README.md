@@ -1,5 +1,8 @@
 Arduino IR::Remote WebUI
 ========================
+controll IR Learning Remote via Web.
+
+<img src="http://farm6.staticflickr.com/5498/9343211005_69a25a811e.jpg">
 
 Dependencies
 ------------
@@ -20,6 +23,8 @@ Run
     % export BASIC_AUTH_PASSWORD=password
     % export ARDUINO=/dev/tty.device-name
     % WS_PORT=9000 bundle exec rackup config.ru -p 5000
+
+=> http://localhost:5000
 
 
 Install as a Service
