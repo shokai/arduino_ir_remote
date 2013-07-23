@@ -4,9 +4,6 @@ unsigned int ir_index;
 #define PIN_LED 13
 #define PIN_IR_IN 3
 #define PIN_IR_OUT 12
-#define READ 0
-#define WRITE 1
-byte mode;
 
 void setup(){
   Serial.begin(57600);
