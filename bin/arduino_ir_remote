@@ -22,7 +22,6 @@ loop do
     puts "[READ]"
     ir.read do |data|
       last_ir_data = data
-      p data
     end
   elsif ["w", "write"].include? line.downcase
     puts "[WRITE]"
