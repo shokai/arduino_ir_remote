@@ -8,6 +8,7 @@ if ARGV.empty?
 end
 
 ir = IR::Remote.new ARGV.shift
+ir.temp_pin = 0
 ir.on :read do |data|
   p data
 end
@@ -16,6 +17,9 @@ ir.on :write do |data|
 end
 ir.on :analog do |pin, value|
   # puts "[analog#{pin}] #{value}"
+end
+ir.on :temp do |temp|
+  puts "temp #{temp}"
 end
 
 last_ir_data = ""

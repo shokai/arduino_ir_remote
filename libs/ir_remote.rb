@@ -6,6 +6,7 @@ require File.expand_path "config", File.dirname(__FILE__)
 module IR
   class Remote
     include EventEmitter
+    attr_accessor :temp_pin
 
     def initialize(port)
       @state = nil
@@ -14,6 +15,11 @@ module IR
         loop do
           process_input @sp.gets.strip
         end
+      end
+      @temp_pin = 0
+      this = self
+      on :analog do |pin, value|
+        this.emit :temp, value.to_f*5*100/1024 if pin == @temp_pin
       end
     end
 
