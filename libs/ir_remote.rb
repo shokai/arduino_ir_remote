@@ -32,7 +32,14 @@ module IR
 
       case @state
       when :read
-        emit :__ir_read, input if input =~ /^[\d,]+$/
+        if input =~ /^[\d,]+$/
+          emit :__ir_read, input
+          emit :read, input
+        end
+      when :write
+        if input =~ /^[\d,]+$/
+          emit :write, input
+        end
       when /^ANALOG\d+$/
         if input =~ /^\d+$/
           emit :analog, @state.scan(/(\d+)$/)[0][0].to_i, input.to_i

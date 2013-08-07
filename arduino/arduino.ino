@@ -12,18 +12,22 @@ void setup(){
   pinMode(PIN_LED, OUTPUT);
 }
 
+unsigned int analog_count = 0;
 void loop(){
   if(Serial.available()){
     char recv = Serial.read();
     process_input(recv);
   }
   else{
-    for(byte i = 0; i < 6; i++){
-      Serial.print("ANALOG");
-      Serial.println(i);
-      Serial.println(analogRead(i));
+    if(analog_count < 1){
+      for(byte i = 0; i < 6; i++){
+        Serial.print("ANALOG");
+        Serial.println(i);
+        Serial.println(analogRead(i));
+      }
     }
-    delay(1000);
+    analog_count += 1;
+    if(analog_count > 65534) analog_count = 0;
   }
 }
 

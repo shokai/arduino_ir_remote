@@ -8,9 +8,14 @@ if ARGV.empty?
 end
 
 ir = IR::Remote.new ARGV.shift
-
+ir.on :read do |data|
+  p data
+end
+ir.on :write do |data|
+  p data
+end
 ir.on :analog do |pin, value|
-  puts "#{pin} #{value}"
+  # puts "[analog#{pin}] #{value}"
 end
 
 last_ir_data = ""
