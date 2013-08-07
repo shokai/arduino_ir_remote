@@ -26,11 +26,17 @@ module IR
       when "WRITE"
         @state = :write
         return
+      when /^ANALOG\d+$/
+        @state = input
       end
 
       case @state
       when :read
         emit :__ir_read, input if input =~ /^[\d,]+$/
+      when /^ANALOG\d+$/
+        if input =~ /^\d+$/
+          emit :analog, @state.scan(/(\d+)$/)[0][0].to_i, input.to_i
+        end
       else
       end
       emit :data, input

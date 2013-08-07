@@ -17,6 +17,14 @@ void loop(){
     char recv = Serial.read();
     process_input(recv);
   }
+  else{
+    for(byte i = 0; i < 6; i++){
+      Serial.print("ANALOG");
+      Serial.println(i);
+      Serial.println(analogRead(i));
+    }
+    delay(1000);
+  }
 }
 
 void ir_read(byte ir_pin){
