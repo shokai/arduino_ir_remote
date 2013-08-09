@@ -30,7 +30,8 @@ Install Dependencies
 - Temperature Sensor
   - Analog PIN 0
 
-<img src="http://farm8.staticflickr.com/7282/9343246881_4bccff6386.jpg">
+<img src="http://farm4.staticflickr.com/3779/9469310547_ef06fe7949.jpg">
+<img src="http://farm4.staticflickr.com/3831/9472093512_fee45ca7c3.jpg">
 
 ### Install Rubygems
 
