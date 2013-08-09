@@ -13,6 +13,7 @@ Dependencies
 - [Arduino](http://arduino.cc)
   - [38KHz IR Receiver](http://akizukidenshi.com/catalog/g/gI-00614/)
   - IR LED
+- [Temperature Sensor LM35DZ](http://akizukidenshi.com/catalog/g/gI-00116/)
 
 
 Install Dependencies
@@ -26,6 +27,8 @@ Install Dependencies
   - Digital PIN 12
 - IR Receiver
   - Digital PIN 3
+- Temperature Sensor
+  - Analog PIN 0
 
 <img src="http://farm8.staticflickr.com/7282/9343246881_4bccff6386.jpg">
 
