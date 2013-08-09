@@ -14,7 +14,7 @@ ir.on :analog do |pin, value|
   # puts "[analog#{pin}] #{value}"
 end
 ir.on :temp do |temp|
-  puts "temp #{temp}"
+  # puts "temp #{temp}"
 end
 
 last_ir_data = ""
