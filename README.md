@@ -13,7 +13,7 @@ Dependencies
 - [Arduino](http://arduino.cc)
   - [38KHz IR Receiver](http://akizukidenshi.com/catalog/g/gI-00614/)
   - IR LED
-- [Temperature Sensor LM35DZ](http://akizukidenshi.com/catalog/g/gI-00116/)
+  - [Temperature Sensor LM35DZ](http://akizukidenshi.com/catalog/g/gI-00116/)
 
 
 Install Dependencies
