@@ -8,7 +8,13 @@ module IR
     include EventEmitter
     attr_accessor :temp_pin
 
-    def initialize(port)
+    def self.list
+      Dir.entries('/dev').grep(/tty\.?(usb|acm)/i).map{|fname| "/dev/#{fname}"}
+    end
+
+    def initialize(port=nil)
+      port = self.class.list[0] unless port
+      raise ArgumentError, "IR Remote not found" unless port
       @state = nil
       @sp = SerialPort.new(port, 57600, 8, 1, SerialPort::NONE) # 57600bps, 8bit, stopbit1, parity-none
       Thread.new do

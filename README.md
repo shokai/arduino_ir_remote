@@ -49,4 +49,10 @@ save IR data into "data.yml"
 Run
 ---
 
+use default Arduino
+
+    % bundle exec bin/arduino_ir_remote
+
+specify Arduino port
+
     % bundle exec bin/arduino_ir_remote /dev/tty.usb-devicename

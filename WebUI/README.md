@@ -22,7 +22,8 @@ Run
     % export BASIC_AUTH_USERNAME=username
     % export BASIC_AUTH_PASSWORD=password
     % export ARDUINO=/dev/tty.device-name
-    % WS_PORT=9000 bundle exec rackup config.ru -p 5000
+    % export WS_PORT=9000
+    % bundle exec rackup config.ru -p 5000
 
 => http://localhost:5000
 
