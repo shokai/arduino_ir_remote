@@ -14,6 +14,12 @@ get '/style.css' do
   scss :style
 end
 
+ir.temp_pin = 0
+ir.on :temp do |temp|
+  puts temp
+  io.push :temp, temp
+end
+
 io.on :connect do |client|
   $logger.info "new client <#{client}>"
   logs.each do |log|
