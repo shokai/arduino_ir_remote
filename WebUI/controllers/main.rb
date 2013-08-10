@@ -1,5 +1,5 @@
 io = Sinatra::RocketIO
-ir = IR::Remote.new ENV["ARDUINO"]
+ir = ArduinoIrRemote.connect ENV["ARDUINO"]
 logs = []
 
 before '/*' do
@@ -34,9 +34,9 @@ io.on :disconnect do |client|
 end
 
 io.on :ir_write do |name|
-  unless IR::DATA.has_key? name
-    $logger.info "[#{name}] is not IR::DATA"
-    io.push :log, "[#{name}] is not IR::DATA"
+  unless ArduinoIrRemote::DATA.has_key? name
+    $logger.info "[#{name}] is not ArduinoIrRemote::DATA"
+    io.push :log, "[#{name}] is not ArduinoIrRemote::DATA"
   else
     log = "[#{name}] - #{Time.now}"
     $logger.info log
@@ -45,6 +45,6 @@ io.on :ir_write do |name|
     while logs.size > 1000
       logs.shift
     end
-    ir.write IR::DATA[name]
+    ir.write ArduinoIrRemote::DATA[name]
   end
 end

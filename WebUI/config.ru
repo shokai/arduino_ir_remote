@@ -18,10 +18,11 @@ require 'haml'
 require 'sass'
 require 'json'
 require 'hashie'
-$:.unshift File.expand_path '../', File.dirname(__FILE__)
-require 'libs/ir_remote'
-require 'WebUI/helpers/helper'
-require 'WebUI/controllers/main'
+$:.unshift File.expand_path '../lib', File.dirname(__FILE__)
+require 'arduino_ir_remote'
+$:.unshift File.dirname(__FILE__)
+require 'helpers/helper'
+require 'controllers/main'
 
 set :haml, :escape_html => true
 

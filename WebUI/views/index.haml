@@ -14,7 +14,7 @@
 %h2 IR::DATA
 %div#ir
   %p.buttons
-    - IR::DATA.keys.each do |name|
+    - ArduinoIrRemote::DATA.keys.each do |name|
       %input{:type => :button, :value => name, :class => "btn_ir_write btn"}
   %p.status
 
