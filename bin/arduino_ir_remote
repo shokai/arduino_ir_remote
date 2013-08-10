@@ -10,20 +10,21 @@ end
 ir.on :write do |data|
   p data
 end
-ir.on :analog do |pin, value|
-  # puts "[analog#{pin}] #{value}"
-end
-ir.on :temp do |temp|
-  # puts "temp #{temp}"
-end
 
 last_ir_data = ""
 
 puts "IR::DATA => #{IR::DATA.keys.inspect}"
 
+Thread.new do
+  loop do
+    sleep 60
+  end
+end
+
 loop do
   puts "read/write? [r/w]"
   line = STDIN.gets.strip
+  puts "temperature: #{ir.temp_sensor}"
   if ["r", "read"].include? line.downcase
     puts "[READ]"
     ir.read do |data|

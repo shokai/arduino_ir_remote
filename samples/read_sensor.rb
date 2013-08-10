@@ -4,13 +4,10 @@ require 'ir_remote'
 ir = IR::Remote.new ARGV.shift
 ir.temp_pin = 0
 
-ir.on :analog do |pin, value|
-  puts "[analog#{pin}] #{value}"
-end
-ir.on :temp do |temp|
-  puts "temp #{temp}"
-end
-
 loop do
+  0.upto(5).each{ |i|
+    puts "[analog#{i}] #{ir.analog_read i}"
+  }
+  puts "temp #{ir.temp_sensor}"
   sleep 1
 end
