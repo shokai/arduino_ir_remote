@@ -8,8 +8,12 @@ io.on("disconnect", function(){
   $("#status .rocketio").text("disconnect");
 });
 
-io.on("temp", function(temp){
-  $("#status .temp").text("temperature : "+temp);
+io.on("temp_sensor", function(value){
+  $("#status .temp_sensor").text("temperature : "+value);
+});
+
+io.on("light_sensor", function(value){
+  $("#status .light_sensor").text("light : "+value);
 });
 
 io.on("log", function(text){

@@ -15,9 +15,11 @@ get '/style.css' do
 end
 
 ir.temp_pin = 0
-ir.on :temp do |temp|
-  puts temp
-  io.push :temp, temp
+io.on :start do
+  EM::add_periodic_timer 1 do
+    io.push :temp_sensor, ir.temp_sensor
+    io.push :light_sensor, ir.analog_read(1)
+  end
 end
 
 io.on :connect do |client|
