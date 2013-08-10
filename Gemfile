@@ -1,5 +1,4 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-gem "serialport"
-gem "event_emitter"
-gem "hashie"
+# Specify your gem's dependencies in arduino_ir_remote.gemspec
+gemspec

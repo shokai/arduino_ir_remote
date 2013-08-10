@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
-$:.unshift File.expand_path '../libs', File.dirname(__FILE__)
-require 'ir_remote'
+$:.unshift File.expand_path '../lib', File.dirname(__FILE__)
+require 'arduino_ir_remote'
 
-ir = IR::Remote.new ARGV.shift
+ir = ArduinoIrRemote.connect ARGV.shift
 ir.temp_pin = 0
 ir.on :read do |data|
   p data
@@ -13,7 +13,7 @@ end
 
 last_ir_data = ""
 
-puts "IR::DATA => #{IR::DATA.keys.inspect}"
+puts "IR DATA => #{ArduinoIrRemote::DATA.keys.inspect}"
 
 Thread.new do
   loop do
@@ -33,9 +33,9 @@ loop do
   elsif ["w", "write"].include? line.downcase
     puts "[WRITE]"
     ir.write last_ir_data
-  elsif IR::DATA.has_key? line
+  elsif ArduinoIrRemote::DATA.has_key? line
     puts "[#{line}]"
-    ir.write IR::DATA[line]
+    ir.write ArduinoIrRemote::DATA[line]
   else
     puts "[#{line}] no data"
   end

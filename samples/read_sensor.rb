@@ -1,7 +1,7 @@
-$:.unshift File.expand_path '../libs', File.dirname(__FILE__)
-require 'ir_remote'
+$:.unshift File.expand_path '../lib', File.dirname(__FILE__)
+require 'arduino_ir_remote'
 
-ir = IR::Remote.new ARGV.shift
+ir = ArduinoIrRemote.connect ARGV.shift
 ir.temp_pin = 0
 
 loop do

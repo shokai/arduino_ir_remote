@@ -1,20 +1,9 @@
-require "rubygems"
-require "serialport"
-require "event_emitter"
-require File.expand_path "config", File.dirname(__FILE__)
-
-module IR
-  class Remote
+module ArduinoIrRemote
+  class Device
     include EventEmitter
     attr_accessor :temp_pin
 
-    def self.list
-      Dir.entries('/dev').grep(/tty\.?(usb|acm)/i).map{|fname| "/dev/#{fname}"}
-    end
-
-    def initialize(port=nil)
-      port = self.class.list[0] unless port
-      raise ArgumentError, "IR Remote not found" unless port
+    def initialize(port)
       @state = nil
       @sp = SerialPort.new(port, 57600, 8, 1, SerialPort::NONE) # 57600bps, 8bit, stopbit1, parity-none
       Thread.new do
@@ -24,7 +13,6 @@ module IR
       end
       @temp_pin = 0
       @analogs = Array.new 6, 0
-      this = self
     end
 
     private
@@ -80,5 +68,6 @@ module IR
     def temp_sensor
       analog_read(@temp_pin).to_f*5*100/1024
     end
+
   end
 end

@@ -6,6 +6,13 @@ IR Learning Remote
 - https://github.com/shokai/arduino_ir_remote
 - [Arduinoで赤外線リモコン作ってWebから操作できるようにした](http://shokai.org/blog/archives/8012)
 
+
+Installation
+------------
+
+    % gem install arduino_ir_remote
+
+
 Dependencies
 ------------
 - Mac or Linux
@@ -33,11 +40,6 @@ Install Dependencies
 <img src="http://farm4.staticflickr.com/3779/9469310547_ef06fe7949.jpg">
 <img src="http://farm4.staticflickr.com/3831/9472093512_fee45ca7c3.jpg">
 
-### Install Rubygems
-
-    % gem install bundler
-    % bundle install
-
 
 data.yml
 --------
@@ -57,3 +59,12 @@ use default Arduino
 specify Arduino port
 
     % bundle exec bin/arduino_ir_remote /dev/tty.usb-devicename
+
+
+Contributing
+------------
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request
