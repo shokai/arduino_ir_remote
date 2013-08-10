@@ -15,6 +15,27 @@ module ArduinoIrRemote
       @analogs = Array.new 6, 0
     end
 
+    public
+    def write(data)
+      "w#{data}W".split(//).each do |c|
+        @sp.write c
+        sleep 0.001
+      end
+    end
+
+    def read(&block)
+      once :__ir_read, &block if block_given?
+      @sp.write "r"
+    end
+
+    def analog_read(pin)
+      @analogs[pin]
+    end
+
+    def temp_sensor
+      analog_read(@temp_pin).to_f*5*100/1024
+    end
+
     private
     def process_input(input)
       case input
@@ -47,27 +68,5 @@ module ArduinoIrRemote
       end
       emit :data, input
     end
-
-    public
-    def write(data)
-      "w#{data}W".split(//).each do |c|
-        @sp.write c
-        sleep 0.001
-      end
-    end
-
-    def read(&block)
-      once :__ir_read, &block if block_given?
-      @sp.write "r"
-    end
-
-    def analog_read(pin)
-      @analogs[pin]
-    end
-
-    def temp_sensor
-      analog_read(@temp_pin).to_f*5*100/1024
-    end
-
   end
 end
