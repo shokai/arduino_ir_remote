@@ -1,3 +1,8 @@
+=== 0.0.2 2013-08-11
+
+* add tests
+* fix gem description
+
 === 0.0.1 2013-08-11
 
 * read write IR Data
