@@ -2,13 +2,16 @@ module ArduinoIrRemote
   class Device
     include EventEmitter
     attr_accessor :temp_pin
+    attr_reader :status
 
     def initialize(port)
+      @status = Status::CLOSE
       @state = nil
-      @sp = SerialPort.new(port, 57600, 8, 1, SerialPort::NONE) # 57600bps, 8bit, stopbit1, parity-none
+      @serial = SerialPort.new(port, 57600, 8, 1, SerialPort::NONE) # 57600bps, 8bit, stopbit1, parity-none
+      @status = Status::OPEN
       Thread.new do
-        loop do
-          process_input @sp.gets.strip
+        while status == Status::OPEN do
+          process_input @serial.gets.strip
         end
       end
       @temp_pin = 0
@@ -16,17 +19,23 @@ module ArduinoIrRemote
       sleep 3
     end
 
+    def close
+      return if status == Status::CLOSE
+      @status = Status::CLOSE
+      @serial.close
+    end
+
     public
     def write(data)
       "w#{data}W".split(//).each do |c|
-        @sp.write c
+        @serial.write c
         sleep 0.001
       end
     end
 
     def read(&block)
       once :__ir_read, &block if block_given?
-      @sp.write "r"
+      @serial.write "r"
     end
 
     def analog_read(pin)
