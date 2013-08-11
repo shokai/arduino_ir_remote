@@ -57,7 +57,7 @@ if args.has_param? :write
     puts %Q{there is no data "#{args[:write]}"}
     exit 1
   end
-  puts %Q{Write "#{args[:write]}"}
+  puts %Q{write "#{args[:write]}"}
   ir.write ArduinoIrRemote::DATA[ args[:write] ]
   ir.wait
 end
