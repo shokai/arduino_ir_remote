@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     arduino_ir_remote (0.0.1)
+      args_parser
       event_emitter
       hashie
       serialport
@@ -9,6 +10,7 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
+    args_parser (0.1.6)
     event_emitter (0.2.5)
     hashie (2.0.5)
     rake (10.1.0)

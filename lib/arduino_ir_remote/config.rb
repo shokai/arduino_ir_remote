@@ -1,3 +1,4 @@
 module ArduinoIrRemote
-  DATA = Hashie::Mash.new YAML::load File.open(File.expand_path '.ir_remote.yml', ENV['HOME']).read
+  DATA_FILE = File.expand_path '.ir_remote.yml', ENV['HOME']
+  DATA = Hashie::Mash.new YAML::load File.open(DATA_FILE).read
 end

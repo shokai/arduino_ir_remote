@@ -1,43 +1,82 @@
 #!/usr/bin/env ruby
 $:.unshift File.expand_path '../lib', File.dirname(__FILE__)
 require 'arduino_ir_remote'
+require 'args_parser'
 
-ir = ArduinoIrRemote.connect ARGV.shift
+args = ArgsParser.parse ARGV do
+  arg :arduino, "arduino port", :default => ArduinoIrRemote.list[0]
+  arg :read, "read IR Data", :alias => :r
+  arg :write, "write IR Data", :alias => :w
+  arg :list, "show list of IR Data"
+  arg :temp, "show temperature", :alias => :t
+  arg :version, "show version", :alias => :v
+  arg :help, "show help", :alias => :h
+end
+
+if args.has_option? :version
+  puts "Arduino IR Remote v#{ArduinoIrRemote::VERSION}"
+  exit
+end
+
+binname = File.basename __FILE__
+if args.has_option? :help or
+    (!args.has_param?(:write) and !args.has_param?(:read) and
+     !args.has_option?(:list) and !args.has_option?(:temp))
+  STDERR.puts args.help
+  STDERR.puts
+  STDERR.puts "e.g."
+  STDERR.puts " % #{binname} --read  tv_on"
+  STDERR.puts " % #{binname} --write tv_on"
+  STDERR.puts
+  STDERR.puts ""
+  exit
+end
+
+if args.has_option? :list
+  puts "-- #{ArduinoIrRemote::DATA_FILE}"
+  ArduinoIrRemote::DATA.each do |k,v|
+    puts %Q{"#{k}" : #{v.size} bytes}
+  end
+  exit
+end
+
+ir = ArduinoIrRemote.connect args[:arduino]
 ir.temp_pin = 0
-ir.on :read do |data|
-  p data
+
+if args.has_option? :temp
+  puts ir.temp_sensor
+  exit
 end
-ir.on :write do |data|
-  p data
-end
 
-last_ir_data = ""
-
-puts "IR DATA => #{ArduinoIrRemote::DATA.keys.inspect}"
-
-Thread.new do
-  loop do
-    sleep 60
+if args.has_param? :write
+  ir.on :write do |data|
+    p data
+    exit
   end
+  unless ArduinoIrRemote::DATA.has_key? args[:write]
+    puts %Q{there is no data "#{args[:write]}"}
+    exit 1
+  end
+  puts %Q{Write "#{args[:write]}"}
+  ir.write ArduinoIrRemote::DATA[ args[:write] ]
+  ir.wait
 end
 
-loop do
-  puts "read/write? [r/w]"
-  line = STDIN.gets.strip
-  puts "temperature: #{ir.temp_sensor}"
-  if ["r", "read"].include? line.downcase
-    puts "[READ]"
-    ir.read do |data|
-      last_ir_data = data
+if args.has_param? :read
+  ir.read do |data|
+    p data
+    if ArduinoIrRemote::DATA.has_key? args[:read]
+      puts %Q{overwrite "#{args[:read]}" ?}
+      print "[Y/n]\n> "
+      exit 1 if STDIN.gets.strip.downcase =~ /n/
     end
-  elsif ["w", "write"].include? line.downcase
-    puts "[WRITE]"
-    ir.write last_ir_data
-  elsif ArduinoIrRemote::DATA.has_key? line
-    puts "[#{line}]"
-    ir.write ArduinoIrRemote::DATA[line]
-  else
-    puts "[#{line}] no data"
+    ArduinoIrRemote::DATA[ args[:read] ] = data
+    File.open(ArduinoIrRemote::DATA_FILE, "w+") do |f|
+      f.write ArduinoIrRemote::DATA.to_h.to_yaml
+    end
+    puts %Q{"#{args[:read]}" saved!}
+    exit 1
   end
-  sleep 2
+  puts "reading.."
+  ir.wait
 end

@@ -19,6 +19,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "serialport"
+  spec.add_dependency "args_parser"
   spec.add_dependency "event_emitter"
   spec.add_dependency "hashie"
 

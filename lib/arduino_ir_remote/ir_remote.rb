@@ -13,6 +13,7 @@ module ArduinoIrRemote
       end
       @temp_pin = 0
       @analogs = Array.new 6, 0
+      sleep 3
     end
 
     public
@@ -34,6 +35,16 @@ module ArduinoIrRemote
 
     def temp_sensor
       analog_read(@temp_pin).to_f*5*100/1024
+    end
+
+    def wait(&block)
+      loop do
+        if block_given?
+          yield
+        else
+          sleep 1
+        end
+      end
     end
 
     private
