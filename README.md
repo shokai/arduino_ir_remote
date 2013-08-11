@@ -1,9 +1,9 @@
 Arduino IR::Remote
 ==================
-This rubygem provides a wrapper for IR-Learning-Remote that has been built using the Arduino.
+This Rubygem provides a wrapper for IR-Learning-Remote that has been built using the Arduino.
 
-- Read/Write IR Remote on CUI and WebUI
 - https://github.com/shokai/arduino_ir_remote
+- Read/Write IR Remote on CUI and WebUI
 - [Arduinoで赤外線リモコン作ってWebから操作できるようにした](http://shokai.org/blog/archives/8012)
 
 
