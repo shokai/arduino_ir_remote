@@ -15,16 +15,15 @@ Installation
 
 Dependencies
 ------------
+
+### Requirements
+
 - Mac or Linux
   - Ruby 1.8.7 ~ 2.0.0
-- [Arduino](http://arduino.cc)
+- [Arduino](http://arduino.cc) Micro or Leonard
   - [38KHz IR Receiver](http://akizukidenshi.com/catalog/g/gI-00614/)
   - IR LED
   - [Temperature Sensor LM35DZ](http://akizukidenshi.com/catalog/g/gI-00116/)
-
-
-Install Dependencies
---------------------
 
 ### Setup Arduino
 
@@ -41,24 +40,38 @@ Install Dependencies
 <img src="http://farm4.staticflickr.com/3831/9472093512_fee45ca7c3.jpg">
 
 
-data.yml
---------
+arduino_ir_remote command
+-------------------------
 
-save IR data into "data.yml"
+    % arduino_ir_remote --help
+    % arduino_ir_remote --list
 
-    % sample.data.yml data.yml
+read IR
+
+    % arduino_ir_remote --read tv_on
+
+write IR
+
+    % arduino_ir_remote --write tv_on
 
 
-Run
----
+Usage
+-----
 
-use default Arduino
+```ruby
+require 'arduino_ir_remote'
 
-    % bundle exec bin/arduino_ir_remote
+ir = ArduinoIrRemote.connect
+ir.temp_pin = 0  # set temperature sensor pin
 
-specify Arduino port
-
-    % bundle exec bin/arduino_ir_remote /dev/tty.usb-devicename
+loop do
+  0.upto(5).each{ |i|
+    puts "[analog#{i}] #{ir.analog_read i}"  # read analog input pin 0~5
+  }
+  puts "temp #{ir.temp_sensor}"  # read temperature sensor
+  sleep 1
+end
+```
 
 
 Contributing
