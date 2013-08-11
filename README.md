@@ -55,13 +55,37 @@ write IR
     % arduino_ir_remote --write tv_on
 
 
-Usage
------
+Gem Usage
+---------
+
+### Connect
 
 ```ruby
 require 'arduino_ir_remote'
 
-ir = ArduinoIrRemote.connect
+ir = ArduinoIrRemote.connect   # use default device
+ir = ArduinoIrRemote.connect "/dev/tty.usb-devicename"
+```
+
+### Read IR DATA
+
+```ruby
+ir.read do |data|
+  p data
+end
+ir.wait
+```
+
+### Write IR DATA
+
+```ruby
+ir.write data
+ir.wait
+```
+
+### Read Sensors
+
+```ruby
 ir.temp_pin = 0  # set temperature sensor pin
 
 loop do
