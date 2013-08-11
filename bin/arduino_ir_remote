@@ -22,13 +22,13 @@ binname = File.basename __FILE__
 if args.has_option? :help or
     (!args.has_param?(:write) and !args.has_param?(:read) and
      !args.has_option?(:list) and !args.has_option?(:temp))
+  STDERR.puts "Arduino IR Remote - https://github.com/shokai/arduino_ir_remote"
+  STDERR.puts "--"
   STDERR.puts args.help
   STDERR.puts
   STDERR.puts "e.g."
   STDERR.puts " % #{binname} --read  tv_on"
   STDERR.puts " % #{binname} --write tv_on"
-  STDERR.puts
-  STDERR.puts ""
   exit
 end
 
