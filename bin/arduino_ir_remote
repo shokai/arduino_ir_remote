@@ -33,7 +33,7 @@ if args.has_option? :help or
 end
 
 if args.has_option? :list
-  puts "-- #{ArduinoIrRemote::DATA_FILE}"
+  puts "~> #{ArduinoIrRemote::DATA_FILE}"
   ArduinoIrRemote::DATA.each do |k,v|
     puts %Q{"#{k}" : #{v.size} bytes}
   end
