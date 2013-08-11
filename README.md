@@ -98,6 +98,15 @@ end
 ```
 
 
+Test
+----
+
+    % gem install bundler
+    % bundle install
+    % export ARDUINO=/dev/tty.usb-devicename
+    % bundle exec rake test
+
+
 Contributing
 ------------
 1. Fork it
