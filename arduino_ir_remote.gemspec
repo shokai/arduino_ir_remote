@@ -8,8 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = ArduinoIrRemote::VERSION
   spec.authors       = ["Sho Hashimoto"]
   spec.email         = ["hashimoto@shokai.org"]
-  spec.description   = %q{This Rubygem provides a wrapper for IR-Learning-Remote that has been built using the Arduino. https://github.com/shokai/arduino_ir_remote}
+  spec.description   = %Q{This Rubygem provides a wrapper for IR-Learning-Remote that has been built using the Arduino.\nPlease setup Arduino -> https://github.com/shokai/arduino_ir_remote}
   spec.summary       = spec.description
+  spec.post_install_message = spec.description
   spec.homepage      = "https://github.com/shokai/arduino_ir_remote"
   spec.license       = "MIT"
 
