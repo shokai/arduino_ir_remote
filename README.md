@@ -20,14 +20,15 @@ Dependencies
 
 - Mac or Linux
   - Ruby 1.8.7 ~ 2.0.0
-- [Arduino](http://arduino.cc) Micro or Leonard
+- [Arduino](http://arduino.cc), testing on Micro or Leonard
   - [38KHz IR Receiver](http://akizukidenshi.com/catalog/g/gI-00614/)
   - IR LED
   - [Temperature Sensor LM35DZ](http://akizukidenshi.com/catalog/g/gI-00116/)
 
 ### Setup Arduino
 
-- Firmware
+- Arduino Firmware
+  - `arduino` directory in this repository
   - https://github.com/shokai/arduino_ir_remote/blob/master/arduino/arduino.ino
 - IR LED
   - Digital PIN 12
