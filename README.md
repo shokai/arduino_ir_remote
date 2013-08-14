@@ -10,13 +10,12 @@ This Rubygem provides a wrapper for IR-Learning-Remote that has been built using
 Installation
 ------------
 
+### Install Rubygem
+
     % gem install arduino_ir_remote
 
 
-Dependencies
-------------
-
-### Requirements
+### Dependencies
 
 - Mac or Linux
   - Ruby 1.8.7 ~ 2.0.0
@@ -25,11 +24,11 @@ Dependencies
   - IR LED
   - [Temperature Sensor LM35DZ](http://akizukidenshi.com/catalog/g/gI-00116/)
 
+
 ### Hardware Setup
 
 - Arduino Firmware
-  - `arduino` directory in this repository
-  - https://github.com/shokai/arduino_ir_remote/blob/master/arduino/arduino.ino
+  - [./arduino/arduino.ino](https://github.com/shokai/arduino_ir_remote/blob/master/arduino/arduino.ino)
 - IR LED
   - Digital PIN 12
 - IR Receiver
@@ -41,11 +40,11 @@ Dependencies
 
 
 IR Receiver + LED (Minimum setup)
-<a href="http://www.flickr.com/photos/shokai/9367954015/"><img src="http://farm3.staticflickr.com/2843/9367954015_6035e68d8d_z.jpg"></a>
+<a href="http://www.flickr.com/photos/shokai/9508327459/"><img src="http://farm8.staticflickr.com/7416/9508327459_54770a00fe_z.jpg"></a>
 
 
 IR Receiver + LED + Temperature Sensor + CdS
-<a href="http://www.flickr.com/photos/shokai/9508961982/"><img src="http://farm3.staticflickr.com/2818/9508961982_54948f1303_z.jpg"></a><a href="http://www.flickr.com/photos/shokai/9506165953/"><img src="http://farm3.staticflickr.com/2861/9506165953_14c36e50cc_z.jpg"></a>
+<a href="http://www.flickr.com/photos/shokai/9511120396/"><img src="http://farm6.staticflickr.com/5543/9511120396_404eef32b7_z.jpg"></a><a href="http://www.flickr.com/photos/shokai/9506165953/"><img src="http://farm3.staticflickr.com/2861/9506165953_14c36e50cc_z.jpg"></a>
 
 
 Usage
