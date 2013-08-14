@@ -25,7 +25,7 @@ Dependencies
   - IR LED
   - [Temperature Sensor LM35DZ](http://akizukidenshi.com/catalog/g/gI-00116/)
 
-### Setup Arduino
+### Hardware Setup
 
 - Arduino Firmware
   - `arduino` directory in this repository
@@ -34,33 +34,42 @@ Dependencies
   - Digital PIN 12
 - IR Receiver
   - Digital PIN 3
-- Temperature Sensor
+- Temperature Sensor (optional)
   - Analog PIN 0
+- Additional Sensors (optional)
+  - Analog PIN 1~5
 
-<img src="http://farm4.staticflickr.com/3779/9469310547_ef06fe7949.jpg">
-<img src="http://farm4.staticflickr.com/3831/9472093512_fee45ca7c3.jpg">
+
+IR Receiver + LED (Minimum setup)
+<a href="http://www.flickr.com/photos/shokai/9367954015/"><img src="http://farm3.staticflickr.com/2843/9367954015_6035e68d8d_z.jpg"></a>
 
 
-arduino_ir_remote command
--------------------------
+IR Receiver + LED + Temperature Sensor + CdS
+<a href="http://www.flickr.com/photos/shokai/9508961982/"><img src="http://farm3.staticflickr.com/2818/9508961982_54948f1303_z.jpg"></a><a href="http://www.flickr.com/photos/shokai/9506165953/"><img src="http://farm3.staticflickr.com/2861/9506165953_14c36e50cc_z.jpg"></a>
+
+
+Usage
+-----
+
+### arduino_ir_remote command
+
 
     % arduino_ir_remote --help
     % arduino_ir_remote --list
 
-read IR
+Read IR Data
 
     % arduino_ir_remote --read tv_on
 
-write IR
+Write IR Data
 
     % arduino_ir_remote --write tv_on
 
 
-Gem Usage
----------
 
-### Connect
+### Rubygem
 
+Connect
 ```ruby
 require 'arduino_ir_remote'
 
@@ -68,8 +77,7 @@ ir = ArduinoIrRemote.connect   # use default device
 ir = ArduinoIrRemote.connect "/dev/tty.usb-devicename"
 ```
 
-### Read IR DATA
-
+Read IR DATA
 ```ruby
 ir.read do |data|
   p data
@@ -77,15 +85,13 @@ end
 ir.wait
 ```
 
-### Write IR DATA
-
+Write IR DATA
 ```ruby
 ir.write data
 ir.wait
 ```
 
-### Read Sensors
-
+Read Sensors
 ```ruby
 ir.temp_pin = 0  # set temperature sensor pin
 
