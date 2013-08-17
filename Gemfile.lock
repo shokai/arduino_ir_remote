@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    arduino_ir_remote (0.0.3)
+    arduino_ir_remote (0.1.0)
       args_parser
       event_emitter
       serialport
