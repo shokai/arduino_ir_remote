@@ -4,7 +4,6 @@ PATH
     arduino_ir_remote (0.0.3)
       args_parser
       event_emitter
-      hashie
       serialport
 
 GEM
@@ -12,7 +11,6 @@ GEM
   specs:
     args_parser (0.1.6)
     event_emitter (0.2.5)
-    hashie (2.0.5)
     minitest (5.0.6)
     rake (10.1.0)
     serialport (1.1.0)

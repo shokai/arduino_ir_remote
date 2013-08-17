@@ -71,9 +71,7 @@ if args.has_param? :read
       exit 1 if STDIN.gets.strip.downcase =~ /n/
     end
     ArduinoIrRemote::DATA[ args[:read] ] = data
-    File.open(ArduinoIrRemote::DATA_FILE, "w+") do |f|
-      f.write ArduinoIrRemote::DATA.to_h.to_yaml
-    end
+    ArduinoIrRemote::DATA.save
     puts %Q{"#{args[:read]}" saved!}
     exit 1
   end

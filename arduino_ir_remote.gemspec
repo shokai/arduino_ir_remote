@@ -22,7 +22,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "serialport"
   spec.add_dependency "args_parser"
   spec.add_dependency "event_emitter"
-  spec.add_dependency "hashie"
 
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"

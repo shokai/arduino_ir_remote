@@ -80,13 +80,15 @@ Read IR DATA
 ```ruby
 ir.read do |data|
   p data
+  ArduinoIrRemote::DATA["tv_on"] = data
+  ArduinoIrRemote::DATA["tv_on"].save
 end
 ir.wait
 ```
 
 Write IR DATA
 ```ruby
-ir.write data
+ir.write ArduinoIrRemote::DATA["tv_on"]
 ir.wait
 ```
 
