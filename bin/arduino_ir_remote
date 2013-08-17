@@ -67,7 +67,7 @@ if args.has_param? :read
     p data
     if ArduinoIrRemote::DATA.has_key? args[:read]
       puts %Q{overwrite "#{args[:read]}" ?}
-      print "[Y/n]\n> "
+      print "[Y/n] > "
       exit 1 if STDIN.gets.strip.downcase =~ /n/
     end
     ArduinoIrRemote::DATA[ args[:read] ] = data
