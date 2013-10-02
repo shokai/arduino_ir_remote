@@ -7,7 +7,7 @@ args = ArgsParser.parse ARGV do
   arg :arduino, "arduino port", :default => ArduinoIrRemote.list[0]
   arg :read, "read IR Data", :alias => :r
   arg :write, "write IR Data", :alias => :w
-  arg :list, "show list of IR Data"
+  arg :list, "show list of IR Data and Devices"
   arg :temp, "show temperature", :alias => :t
   arg :version, "show version", :alias => :v
   arg :help, "show help", :alias => :h
@@ -34,8 +34,13 @@ end
 
 if args.has_option? :list
   puts "~> #{ArduinoIrRemote::DATA_FILE}"
+  puts "== Devices"
+  ArduinoIrRemote.list.each do |device|
+    puts " #{device}"
+  end
+  puts "== Data"
   ArduinoIrRemote::DATA.each do |k,v|
-    puts %Q{"#{k}" : #{v.size} bytes}
+    puts %Q{ "#{k}" : #{v.size} bytes}
   end
   exit
 end
