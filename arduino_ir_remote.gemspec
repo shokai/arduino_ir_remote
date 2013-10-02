@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "serialport"
-  spec.add_dependency "args_parser"
+  spec.add_dependency "args_parser", ">= 0.2.0"
   spec.add_dependency "event_emitter"
 
   spec.add_development_dependency "bundler", "~> 1.3"
