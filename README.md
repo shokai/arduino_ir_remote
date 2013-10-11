@@ -81,7 +81,7 @@ Read IR DATA
 ir.read do |data|
   p data
   ArduinoIrRemote::DATA["tv_on"] = data
-  ArduinoIrRemote::DATA["tv_on"].save
+  ArduinoIrRemote::DATA.save
 end
 ir.wait
 ```
